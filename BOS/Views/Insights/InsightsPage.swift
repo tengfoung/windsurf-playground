@@ -14,16 +14,6 @@ struct InsightsPage: View {
                 // Content
                 ScrollView {
                     VStack(spacing: 24) {
-                        // Search Bar
-                        SearchInsightsView(
-                            searchText: $viewModel.searchText,
-                            isSearching: $viewModel.isSearching,
-                            onSearch: {
-                                // Handle search submission if needed
-                            }
-                        )
-                        .padding(.top, 8)
-                        
                         // Show search results if searching
                         if viewModel.isSearching {
                             searchResultsView
@@ -36,16 +26,8 @@ struct InsightsPage: View {
                     }
                     .padding(.bottom, 24)
                 }
-                .navigationTitle("Insights")
-                .navigationBarTitleDisplayMode(.large)
-                .alert(isPresented: $viewModel.showError) {
-                    Alert(
-                        title: Text("Error"),
-                        message: Text(viewModel.error?.localizedDescription ?? "An unknown error occurred"),
-                        dismissButton: .default(Text("OK"))
-                    )
-                }
                 .overlay(loadingOverlay)
+                .padding(.top, -statusBarHeight-8)
             }
         }
         .onAppear {
@@ -93,9 +75,13 @@ struct InsightsPage: View {
             // Top Picks Section
             if !viewModel.topPicks.isEmpty || !viewModel.moreTopPicks.isEmpty {
                 TopPicksSection(
+                    searchText: $viewModel.searchText,
+                    isSearching: $viewModel.isSearching,
                     topPicks: viewModel.topPicks,
-                    moreTopPicks: viewModel.moreTopPicks,
-                    onViewAll: {}
+                    onViewAll: {},
+                    onSearch: {
+                        // Handle search submission if needed
+                    }
                 )
             }
             

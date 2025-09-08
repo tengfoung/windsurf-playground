@@ -11,39 +11,61 @@ struct SearchInsightsView: View {
             HStack {
                 HStack {
                     Image(systemName: "magnifyingglass")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.white)
                     
                     TextField("Search insights, reports, and more", text: $searchText, onCommit: onSearch)
                         .textFieldStyle(PlainTextFieldStyle())
                         .disableAutocorrection(true)
+                        .foregroundColor(.white)
+                        .accentColor(.white)
+                        .placeholder(when: searchText.isEmpty) {
+                            Text("Search insights, reports, and more")
+                                .foregroundColor(.white.opacity(0.8))
+                        }
                     
                     if !searchText.isEmpty {
                         Button(action: {
                             searchText = ""
                         }) {
                             Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.secondary)
+                                .foregroundColor(.white.opacity(0.8))
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
                 }
-                .padding(8)
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
+                .padding(12)
+                .background(Color.white.opacity(0.2))
+                .cornerRadius(12)
                 
                 if isSearching {
                     Button("Cancel") {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         searchText = ""
                     }
-                    .foregroundColor(.blue)
+                    .foregroundColor(.white)
                     .transition(.move(edge: .trailing))
                 }
             }
-            .padding()
+            .padding(.horizontal, 16)
+            .padding(.top, 8)
+            .padding(.bottom, 8)
             .animation(.easeInOut, value: isSearching)
         }
-        .background(Color(.systemBackground))
+        .background(Color.clear)
+    }
+}
+
+// MARK: - View Extension for Placeholder
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
     }
 }
 

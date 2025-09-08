@@ -181,9 +181,9 @@
 				95084CA8D755F0231E7AE65C /* BOS */,
 				2FC9FA33CC513EB7329CB1B8 /* Products */,
 			);
-			indentWidth = 2;
+			indentWidth = 4;
 			sourceTree = "<group>";
-			tabWidth = 2;
+			tabWidth = 4;
 			usesTabs = 0;
 		};
 /* End PBXGroup section */

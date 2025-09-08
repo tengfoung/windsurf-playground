@@ -23,7 +23,7 @@ struct MainTabView: View {
                 }
                 .tag(2)
             
-            InsightsView()
+            InsightsPage()
                 .tabItem {
                     Label("Insights", systemImage: "lightbulb")
                 }

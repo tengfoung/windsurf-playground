@@ -239,5 +239,6 @@ struct ArticleCard_Previews: PreviewProvider {
                 .padding()
                 .previewDisplayName("Compact with Video")
         }
+        
     }
 }
