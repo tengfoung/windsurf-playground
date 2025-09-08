@@ -40,7 +40,7 @@
 		9A9FF468750AFD04CDA5E983 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9FFE1B217789F410E1255DF1 /* WatchlistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistsView.swift; sourceTree = "<group>"; };
 		A750495BE09CBFE904CE482F /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
-		BEB43699EAC42A17C2EDC933 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		BEB43699EAC42A17C2EDC933 /* NetworkingService.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; tabWidth = 4; };
 		CFC8CFD4EECCC95080CD975E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
