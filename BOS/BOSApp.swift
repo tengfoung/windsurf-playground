@@ -4,7 +4,6 @@ import SwiftUI
 struct BOSApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var appState = AppState()
-    private let dependencies = DependencyContainer.shared
     
     var body: some Scene {
         WindowGroup {
@@ -19,7 +18,6 @@ struct BOSApp: App {
                     }
             } else {
                 MainTabView()
-                    .withDependencies(dependencies)
                     .environmentObject(appState)
             }
         }
