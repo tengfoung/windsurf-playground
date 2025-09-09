@@ -96,14 +96,22 @@ class MockNetworkingService: NetworkingService {
 // MARK: - Real Implementation
 
 class RealNetworkingService: NetworkingService {
-    private let baseURL = "https://api.example.com"
+    private let baseURL: String
     private let urlSession: URLSession
     private let jsonDecoder: JSONDecoder
     
-    init(session: URLSession = .shared) {
+    init(baseURL: String = "https://api.example.com", session: URLSession = .shared) {
+        self.baseURL = baseURL
         self.urlSession = session
         self.jsonDecoder = JSONDecoder()
         self.jsonDecoder.dateDecodingStrategy = .iso8601
+    }
+    
+    func isValidUrl(_ urlToCheck: String) -> Bool {
+        guard let components = URLComponents(string: urlToCheck) else {
+            return false
+        }
+        return components.host != nil && components.scheme != nil
     }
     
     // MARK: - API Methods
@@ -115,7 +123,7 @@ class RealNetworkingService: NetworkingService {
             URLQueryItem(name: "query", value: query)
         ]
         
-        guard let url = components?.url else {
+        guard let url = URL(string: endpoint) else {
             completion(.failure(.invalidURL))
             return
         }
@@ -221,6 +229,13 @@ class RealNetworkingService: NetworkingService {
         from url: URL,
         completion: @escaping (Result<T, NetworkError>) -> Void
     ) {
+        guard isValidUrl(url.absoluteString) else {
+            DispatchQueue.main.async {
+                completion(.failure(.invalidURL))
+            }
+            return
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
